@@ -1,16 +1,16 @@
 import { Notification } from '../models/Notification'
-import fetch from 'node-fetch'
+import axios from 'axios'
 
 export default function (next: string, address: string) {
-  return fetch(
-    next ||
-      `https://api.farcaster.xyz/v1/notifications?address=${address}&per_page=10`
-  ).then((res) => res.json()) as Promise<{
+  return axios.get<{
     result: {
       notifications?: { [key: string]: Notification }
     }
     meta?: {
       next?: string
     }
-  }>
+  }>(
+    next ||
+      `https://api.farcaster.xyz/v1/notifications?address=${address}&per_page=10`
+  )
 }

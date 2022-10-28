@@ -11,14 +11,6 @@
     "paths": {
       "@/*": ["*"]
     },
-    "plugins": [
-      { "transform": "typescript-transform-paths", "preferBuiltins": false },
-      {
-        "preferBuiltins": false,
-        "transform": "typescript-transform-paths",
-        "afterDeclarations": true
-      }
-    ],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strict": true
