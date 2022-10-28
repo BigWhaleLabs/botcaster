@@ -1,5 +1,5 @@
+import * as axios from 'axios'
 import { Notification } from '../models/Notification'
-import axios from 'axios'
 
 export default function (next: string, address: string) {
   return axios.get<{
