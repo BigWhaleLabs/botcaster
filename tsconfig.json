@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["es2015"],
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "plugins": [
+      { "transform": "typescript-transform-paths", "preferBuiltins": false },
+      {
+        "preferBuiltins": false,
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      }
+    ],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strict": true
+  },
+  "include": ["src/**/*"]
+}
