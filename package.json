@@ -4,7 +4,7 @@
   "description": "Farcaster bot framework",
   "main": "dist/app.js",
   "repository": "https://github.com/BigWhaleLabs/botcaster",
-  "author": "borodutch",
+  "author": "backmeupplz <backmeupplz@gmail.com>",
   "private": false,
   "license": "MIT",
   "files": [
