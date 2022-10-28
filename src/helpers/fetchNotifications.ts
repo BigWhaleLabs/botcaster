@@ -1,4 +1,4 @@
-import { Notification } from '@/models/Notification'
+import { Notification } from '../models/Notification'
 import axios from 'axios'
 
 export default function (next: string, address: string) {

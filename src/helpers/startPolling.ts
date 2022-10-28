@@ -1,9 +1,9 @@
-import { Notification } from '@/models/Notification'
+import { Notification } from '../models/Notification'
 import {
   getCurrentNotificationId,
   setCurrentNotificationId,
-} from '@/helpers/currentNotificationId'
-import fetchNotifications from '@/helpers/fetchNotifications'
+} from './currentNotificationId'
+import fetchNotifications from './fetchNotifications'
 
 let polling = false
 async function pollNotifications(

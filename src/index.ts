@@ -1,6 +1,2 @@
-import 'module-alias/register'
-
-// Helpers
-export * from '@/helpers/startPolling'
-// Models
-export * from '@/models/Notification'
+export * from './helpers/startPolling'
+export * from './models/Notification'
