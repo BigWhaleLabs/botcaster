@@ -41,7 +41,7 @@ async function pollNotifications(
   }
 }
 
-export default function (
+export function startPolling(
   farcasterAddress: string,
   handler: (notification: Notification) => void
 ) {
