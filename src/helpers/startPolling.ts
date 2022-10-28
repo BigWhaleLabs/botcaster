@@ -18,8 +18,7 @@ async function pollNotifications(
     let next = ''
     const notifications = [] as Notification[]
     do {
-      const result = await fetchNotifications(next, farcasterAddress)
-      const data = result.data
+      const data = await fetchNotifications(next, farcasterAddress)
       notifications.push(...Object.values(data.result.notifications || {}))
       if (currentNotificationId) {
         next = data.meta?.next || ''
