@@ -1,5 +1,5 @@
 {
-  "name": "botcaster",
+  "name": "@big-whale-labs/botcaster",
   "version": "0.0.0",
   "description": "Farcaster bot framework",
   "main": "dist/app.js",
