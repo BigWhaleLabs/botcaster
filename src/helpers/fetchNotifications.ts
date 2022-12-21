@@ -1,8 +1,8 @@
 import { Notification } from '../models/Notification'
-import fetch from 'unfetch'
+import ky from 'ky'
 
 export default function (cursor: string, bearerToken: string) {
-  return fetch(
+  return ky(
     cursor
       ? `https://api.farcaster.xyz/v2/mention-and-reply-notifications?limit=10&cursor=${cursor}`
       : 'https://api.farcaster.xyz/v2/mention-and-reply-notifications?limit=10',
@@ -12,7 +12,7 @@ export default function (cursor: string, bearerToken: string) {
         authorization: `Bearer ${bearerToken}`,
       },
     }
-  ).then((res) => res.json()) as Promise<{
+  ).json() as Promise<{
     result: { notifications: Notification[] }
     next?: { cursor?: string }
   }>

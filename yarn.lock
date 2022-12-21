@@ -46,11 +46,11 @@ __metadata:
     eslint-plugin-node: ^11.1.0
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-sort-imports-es6-autofix: ^0.6.0
+    ky: ^0.33.0
     node-persist: ^3.1.0
     np: ^7.6.2
     prettier: ^2.8.0
     typescript: ^4.9.3
-    unfetch: ^4.2.0
   languageName: unknown
   linkType: soft
 
@@ -2577,6 +2577,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ky@npm:^0.33.0":
+  version: 0.33.0
+  resolution: "ky@npm:0.33.0"
+  checksum: 9354833866c723f607ae4b16fb6c5edc018360a7500d35e023bb895d19f0724d5d6c97d42525990bca056ecb439d7ec1b08a0afa0f6596e4e53b386ac359f15a
+  languageName: node
+  linkType: hard
+
 "latest-version@npm:^5.1.0":
   version: 5.1.0
   resolution: "latest-version@npm:5.1.0"
@@ -4364,13 +4371,6 @@ __metadata:
     has-symbols: ^1.0.2
     which-boxed-primitive: ^1.0.2
   checksum: 89d950e18fb45672bc6b3c961f1e72c07beb9640c7ceed847b571ba6f7d2af570ae1a2584cfee268b9d9ea1e3293f7e33e0bc29eaeb9f8e8a0bab057ff9e6bba
-  languageName: node
-  linkType: hard
-
-"unfetch@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "unfetch@npm:4.2.0"
-  checksum: 6a4b2557e1d921eaa80c4425ce27a404945ec26491ed06e62598f333996a91a44c7908cb26dc7c2746d735762b13276cf4aa41829b4c8f438dde63add3045d7a
   languageName: node
   linkType: hard
 
