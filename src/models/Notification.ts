@@ -1,12 +1,14 @@
 export interface Notification {
   id: string
   type?: string
-  user?: {
+  actor?: {
     username?: string
   }
-  cast?: {
-    text?: string
-    merkleRoot?: string
-    publishedAt: number
+  content: {
+    cast?: {
+      text?: string
+      hash?: string
+      timestamp: number
+    }
   }
 }

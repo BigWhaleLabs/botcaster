@@ -7,7 +7,7 @@ import fetchNotifications from './fetchNotifications'
 
 let polling = false
 async function pollNotifications(
-  farcasterAddress: string,
+  bearerToken: string,
   handler: (notification: Notification) => void
 ) {
   if (polling) return
@@ -15,18 +15,18 @@ async function pollNotifications(
   try {
     const currentNotificationId = await getCurrentNotificationId()
     let currentNotificationIdInSet = true
-    let next = ''
+    let cursor = ''
     const notifications = [] as Notification[]
     do {
-      const { data } = await fetchNotifications(next, farcasterAddress)
-      notifications.push(...Object.values(data.result.notifications || {}))
+      const { result, next } = await fetchNotifications(cursor, bearerToken)
+      notifications.push(...result.notifications)
       if (currentNotificationId) {
-        next = data.meta?.next || ''
+        cursor = next?.cursor || ''
         currentNotificationIdInSet = notifications.some(
           (n) => n.id === currentNotificationId
         )
       }
-    } while (!!currentNotificationId && !currentNotificationIdInSet && !!next)
+    } while (!!currentNotificationId && !currentNotificationIdInSet && !!cursor)
     if (notifications[0]?.id) {
       await setCurrentNotificationId(notifications[0].id)
     }
@@ -41,9 +41,9 @@ async function pollNotifications(
 }
 
 export function startPolling(
-  farcasterAddress: string,
+  bearerToken: string,
   handler: (notification: Notification) => void
 ) {
-  void pollNotifications(farcasterAddress, handler)
-  setInterval(() => pollNotifications(farcasterAddress, handler), 10 * 1000)
+  void pollNotifications(bearerToken, handler)
+  setInterval(() => pollNotifications(bearerToken, handler), 10 * 1000)
 }

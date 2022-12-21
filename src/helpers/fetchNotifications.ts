@@ -1,16 +1,19 @@
-import * as axios from 'axios'
 import { Notification } from '../models/Notification'
+import fetch from 'unfetch'
 
-export default function (next: string, address: string) {
-  return axios.get<{
-    result: {
-      notifications?: { [key: string]: Notification }
+export default function (cursor: string, bearerToken: string) {
+  return fetch(
+    cursor
+      ? `https://api.farcaster.xyz/v2/mention-and-reply-notifications?limit=10&cursor=${cursor}`
+      : 'https://api.farcaster.xyz/v2/mention-and-reply-notifications?limit=10',
+    {
+      headers: {
+        accept: 'application/json',
+        authorization: `Bearer ${bearerToken}`,
+      },
     }
-    meta?: {
-      next?: string
-    }
-  }>(
-    next ||
-      `https://api.farcaster.xyz/v1/notifications?address=${address}&per_page=10`
-  )
+  ).then((res) => res.json()) as Promise<{
+    result: { notifications: Notification[] }
+    next?: { cursor?: string }
+  }>
 }
