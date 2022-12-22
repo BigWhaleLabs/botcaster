@@ -1,9 +1,9 @@
-import { getItem, init, setItem } from 'node-persist'
+import nodePersist from 'node-persist'
 
 let initialized = false
 async function checkInitialized() {
   if (initialized) return
-  await init()
+  await nodePersist.init()
   initialized = true
 }
 
@@ -11,10 +11,10 @@ const key = 'currentNotificationId'
 
 export async function setCurrentNotificationId(currentNotificationId?: string) {
   await checkInitialized()
-  await setItem(key, currentNotificationId)
+  await nodePersist.setItem(key, currentNotificationId)
 }
 
 export async function getCurrentNotificationId() {
   await checkInitialized()
-  return getItem(key)
+  return nodePersist.getItem(key)
 }
