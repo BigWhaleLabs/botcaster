@@ -18,7 +18,9 @@ async function pollNotifications(
     let cursor = ''
     const notifications = [] as Notification[]
     do {
-      const { result, next } = await fetchNotifications(cursor, bearerToken)
+      const {
+        data: { result, next },
+      } = await fetchNotifications(cursor, bearerToken)
       notifications.push(...result.notifications)
       if (currentNotificationId) {
         cursor = next?.cursor || ''

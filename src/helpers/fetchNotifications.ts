@@ -1,8 +1,11 @@
 import { Notification } from '../models/Notification'
-import ky from 'ky-universal'
+import axios from 'axios'
 
 export default function (cursor: string, bearerToken: string) {
-  return ky(
+  return axios.get<{
+    result: { notifications: Notification[] }
+    next?: { cursor?: string }
+  }>(
     cursor
       ? `https://api.farcaster.xyz/v2/mention-and-reply-notifications?limit=10&cursor=${cursor}`
       : 'https://api.farcaster.xyz/v2/mention-and-reply-notifications?limit=10',
@@ -10,10 +13,8 @@ export default function (cursor: string, bearerToken: string) {
       headers: {
         accept: 'application/json',
         authorization: `Bearer ${bearerToken}`,
+        'Accept-Encoding': 'gzip,deflate,compress',
       },
     }
-  ).json() as Promise<{
-    result: { notifications: Notification[] }
-    next?: { cursor?: string }
-  }>
+  )
 }
