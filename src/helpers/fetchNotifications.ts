@@ -1,5 +1,5 @@
 import { Notification } from '../models/Notification'
-import ky from 'ky'
+import ky from 'ky-universal'
 
 export default function (cursor: string, bearerToken: string) {
   return ky(
