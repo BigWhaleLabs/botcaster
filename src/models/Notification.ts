@@ -9,6 +9,7 @@ export interface Notification {
       text?: string
       hash?: string
       threadHash?: string
+      parentHash?: string
       timestamp: number
     }
   }
