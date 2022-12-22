@@ -8,6 +8,7 @@ export interface Notification {
     cast?: {
       text?: string
       hash?: string
+      threadHash?: string
       timestamp: number
     }
   }
