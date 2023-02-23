@@ -7,8 +7,8 @@ export default function (cursor: string, bearerToken: string) {
     next?: { cursor?: string }
   }>(
     cursor
-      ? `https://api.warpcaster.com/v2/mention-and-reply-notifications?limit=10&cursor=${cursor}`
-      : 'https://api.warpcaster.com/v2/mention-and-reply-notifications?limit=10',
+      ? `https://api.warpcast.com/v2/mention-and-reply-notifications?limit=10&cursor=${cursor}`
+      : 'https://api.warpcast.com/v2/mention-and-reply-notifications?limit=10',
     {
       headers: {
         accept: 'application/json',
