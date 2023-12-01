@@ -1,20 +1,10 @@
-import { Notification } from '../models/Notification'
-import axios from 'axios'
+import { NeynarAPIClient } from '@standard-crypto/farcaster-js-neynar'
 
-export default function (cursor: string, bearerToken: string) {
-  return axios.get<{
-    result: { notifications: Notification[] }
-    next?: { cursor?: string }
-  }>(
-    cursor
-      ? `https://api.warpcast.com/v2/mention-and-reply-notifications?limit=10&cursor=${cursor}`
-      : 'https://api.warpcast.com/v2/mention-and-reply-notifications?limit=10',
-    {
-      headers: {
-        accept: 'application/json',
-        authorization: `Bearer ${bearerToken}`,
-        'Accept-Encoding': 'gzip,deflate,compress',
-      },
-    }
-  )
+export default function (fid: number, cursor: string, apiKey: string) {
+  const client = new NeynarAPIClient(apiKey)
+  return client.v1.apis.notifications.mentionsAndReplies({
+    fid,
+    cursor,
+    limit: 10,
+  })
 }

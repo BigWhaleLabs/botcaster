@@ -7,7 +7,8 @@ import fetchNotifications from './fetchNotifications'
 
 let polling = false
 async function pollNotifications(
-  bearerToken: string,
+  fid: number,
+  apiKey: string,
   handler: (notification: Notification) => void
 ) {
   if (polling) return
@@ -20,7 +21,7 @@ async function pollNotifications(
     do {
       const {
         data: { result, next },
-      } = await fetchNotifications(cursor, bearerToken)
+      } = await fetchNotifications(fid, cursor, apiKey)
       notifications.push(...result.notifications)
       if (currentNotificationId) {
         cursor = next?.cursor || ''
@@ -43,9 +44,10 @@ async function pollNotifications(
 }
 
 export function startPolling(
-  bearerToken: string,
+  fid: number,
+  apiKey: string,
   handler: (notification: Notification) => void
 ) {
-  void pollNotifications(bearerToken, handler)
-  setInterval(() => pollNotifications(bearerToken, handler), 10 * 1000)
+  void pollNotifications(fid, apiKey, handler)
+  setInterval(() => pollNotifications(fid, apiKey, handler), 10 * 1000)
 }
