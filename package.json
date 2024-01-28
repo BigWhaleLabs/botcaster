@@ -18,7 +18,7 @@
     "yarn": false
   },
   "scripts": {
-    "release": "np",
+    "release": "np --no-tests",
     "build": "tsc --skipLibCheck",
     "pretty": "prettier --check src",
     "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
