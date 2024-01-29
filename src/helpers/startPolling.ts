@@ -24,7 +24,7 @@ async function pollNotifications(
           result: { notifications: newNotifications, next },
         },
       } = await fetchNotifications(fid, cursor, apiKey)
-      notifications.push(...newNotifications)
+      notifications.push(...(newNotifications || []))
       if (currentNotificationId) {
         cursor = next?.cursor || ''
         currentNotificationIdInSet = notifications.some(
