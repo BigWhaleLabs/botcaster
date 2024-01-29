@@ -1,17 +1,25 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "module": "ESNext",
+    "module": "NodeNext",
     "target": "ESNext",
-    "lib": ["ESNext"],
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"],
+    },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strict": true,
-    "allowSyntheticDefaultImports": true
+    "useUnknownInCatchVariables": false,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"],
 }

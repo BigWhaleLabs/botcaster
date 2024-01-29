@@ -1,9 +1,9 @@
-import { Notification } from '../models/Notification'
+import { Notification } from '@/models/Notification'
 import {
   getCurrentNotificationId,
   setCurrentNotificationId,
-} from './currentNotificationId'
-import fetchNotifications from './fetchNotifications'
+} from '@/helpers/currentNotificationId'
+import fetchNotifications from '@/helpers/fetchNotifications'
 
 let polling = false
 async function pollNotifications(
@@ -20,13 +20,15 @@ async function pollNotifications(
     const notifications = [] as Notification[]
     do {
       const {
-        data: { result, next },
+        data: {
+          result: { notifications, next },
+        },
       } = await fetchNotifications(fid, cursor, apiKey)
-      notifications.push(...result.notifications)
+      notifications.push(...notifications)
       if (currentNotificationId) {
         cursor = next?.cursor || ''
         currentNotificationIdInSet = notifications.some(
-          (n) => n.id === currentNotificationId
+          (n) => n.hash === currentNotificationId
         )
       }
     } while (!!currentNotificationId && !currentNotificationIdInSet && !!cursor)

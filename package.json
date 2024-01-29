@@ -6,11 +6,11 @@
   "types": "dist/index.d.ts",
   "repository": "https://github.com/BigWhaleLabs/botcaster",
   "author": "backmeupplz <backmeupplz@gmail.com>",
+  "prettier": "@big-whale-labs/prettier-config",
   "license": "MIT",
   "files": [
     "dist"
   ],
-  "type": "module",
   "np": {
     "2fa": false,
     "tests": false,
@@ -30,6 +30,10 @@
     "node-persist": "^4.0.1"
   },
   "devDependencies": {
+    "@big-whale-labs/bwl-eslint-backend": "^1.0.5",
+    "@big-whale-labs/prettier-config": "^1.1.3",
+    "@rushstack/eslint-patch": "^1.7.2",
+    "@types/module-alias": "^2",
     "@types/node": "^20.11.10",
     "@types/node-persist": "^3.1.8",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
@@ -40,6 +44,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+    "module-alias": "^2.2.3",
     "np": "^9.2.0",
     "prettier": "^3.2.4",
     "typescript": "^5.3.3"
