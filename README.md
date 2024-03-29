@@ -10,8 +10,8 @@ Farcaster bot framework.
 ```ts
 import { startPolling } from '@big-whale-labs/botcaster'
 
-const farcasterAddress = '0x143979b5E07138b5555001fF34474cFFDf6E97FB'
-startPolling(farcasterAddress, (notification) => {
+const fid = 123
+startPolling(fid, YOUR_API_KEY (notification) => {
   console.log(notification)
 })
 ```
