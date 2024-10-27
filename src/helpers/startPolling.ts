@@ -9,11 +9,13 @@ let polling = false
 async function pollNotifications(
   fid: number,
   apiKey: string,
-  handler: (notification: CastWithInteractions) => void
+  handler: (notification: CastWithInteractions) => void,
+  debug = false
 ) {
   if (polling) return
   polling = true
   try {
+    if (debug) console.log('Polling for notifications...')
     const currentNotificationId = await getCurrentNotificationId()
     let currentNotificationIdInSet = true
     let cursor = ''
@@ -24,6 +26,10 @@ async function pollNotifications(
           result: { notifications: newNotifications, next },
         },
       } = await fetchNotifications(fid, cursor, apiKey)
+      if (debug) {
+        console.log('New notifications:', newNotifications)
+        console.log('Next:', next)
+      }
       notifications.push(...(newNotifications || []))
       if (currentNotificationId) {
         cursor = next?.cursor || ''
@@ -38,6 +44,7 @@ async function pollNotifications(
     for (const notification of notifications) {
       await handler(notification)
     }
+    if (debug) console.log('Polling done.')
   } catch (error) {
     console.error(error)
   } finally {
@@ -48,8 +55,9 @@ async function pollNotifications(
 export function startPolling(
   fid: number,
   apiKey: string,
-  handler: (notification: CastWithInteractions) => void
+  handler: (notification: CastWithInteractions) => void,
+  debug = false
 ) {
-  void pollNotifications(fid, apiKey, handler)
-  setInterval(() => pollNotifications(fid, apiKey, handler), 10 * 1000)
+  void pollNotifications(fid, apiKey, handler, debug)
+  setInterval(() => pollNotifications(fid, apiKey, handler, debug), 10 * 1000)
 }
