@@ -1,10 +1,8 @@
-import { NeynarAPIClient } from '@standard-crypto/farcaster-js-neynar'
+import { NeynarAPIClient } from '@neynar/nodejs-sdk'
 
 export default function (fid: number, cursor: string, apiKey: string) {
   const client = new NeynarAPIClient(apiKey)
-  return client.v1.apis.notifications.mentionsAndReplies({
-    fid,
+  return client.fetchMentionAndReplyNotifications(fid, {
     cursor,
-    limit: 10,
   })
 }

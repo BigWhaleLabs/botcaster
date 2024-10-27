@@ -1,9 +1,9 @@
+import { CastWithInteractions } from '@neynar/nodejs-sdk/build/neynar-api/v1'
 import {
   getCurrentNotificationId,
   setCurrentNotificationId,
 } from './currentNotificationId'
 import fetchNotifications from './fetchNotifications'
-import { CastWithInteractions } from '../../node_modules/@standard-crypto/farcaster-js-neynar/dist/commonjs/v1/openapi/generated/models/cast-with-interactions'
 
 let polling = false
 async function pollNotifications(
@@ -22,9 +22,7 @@ async function pollNotifications(
     const notifications = [] as CastWithInteractions[]
     do {
       const {
-        data: {
-          result: { notifications: newNotifications, next },
-        },
+        result: { notifications: newNotifications, next },
       } = await fetchNotifications(fid, cursor, apiKey)
       if (debug) {
         console.log('New notifications:', newNotifications)
