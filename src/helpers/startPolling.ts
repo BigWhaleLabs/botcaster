@@ -1,4 +1,4 @@
-import { CastWithInteractions } from '@neynar/nodejs-sdk/build/neynar-api/v1'
+import { Notification } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import {
   getCurrentNotificationId,
   setCurrentNotificationId,
@@ -9,7 +9,7 @@ let polling = false
 async function pollNotifications(
   fid: number,
   apiKey: string,
-  handler: (notification: CastWithInteractions) => void,
+  handler: (notification: Notification) => void,
   debug = false
 ) {
   if (polling) return
@@ -19,11 +19,10 @@ async function pollNotifications(
     const currentNotificationId = await getCurrentNotificationId()
     let currentNotificationIdInSet = true
     let cursor = ''
-    const notifications = [] as CastWithInteractions[]
+    const notifications = [] as Notification[]
     do {
-      const {
-        result: { notifications: newNotifications, next },
-      } = await fetchNotifications(fid, cursor, apiKey)
+      const { notifications: newNotifications, next } =
+        await fetchNotifications(fid, cursor, apiKey)
       if (debug) {
         console.log('New notifications:', newNotifications)
         console.log('Next:', next)
@@ -32,12 +31,12 @@ async function pollNotifications(
       if (currentNotificationId) {
         cursor = next?.cursor || ''
         currentNotificationIdInSet = notifications.some(
-          (n) => n.hash === currentNotificationId
+          (n) => n.cast?.hash && n.cast.hash === currentNotificationId
         )
       }
     } while (!!currentNotificationId && !currentNotificationIdInSet && !!cursor)
-    if (notifications[0]?.hash) {
-      await setCurrentNotificationId(notifications[0].hash)
+    if (notifications[0]?.cast?.hash) {
+      await setCurrentNotificationId(notifications[0].cast.hash)
     }
     for (const notification of notifications) {
       await handler(notification)
@@ -53,7 +52,7 @@ async function pollNotifications(
 export function startPolling(
   fid: number,
   apiKey: string,
-  handler: (notification: CastWithInteractions) => void,
+  handler: (notification: Notification) => void,
   debug = false
 ) {
   void pollNotifications(fid, apiKey, handler, debug)
